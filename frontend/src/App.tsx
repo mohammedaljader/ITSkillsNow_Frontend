@@ -1,30 +1,30 @@
 import React from 'react';
-import './app.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './Components/Layout/Layout';
+import CourseListPage from './Pages/CourseListPage';
+import Home from './Pages/Home';
+import MessageListPage from './Pages/MessageListPage';
 
 function App() {
 	return (
-		<div className="login-page">
-			<form className="login-form">
-				<h2>Login</h2>
-				<input
-					type="email"
-					placeholder="Email"
-					className="login-input"
-				/>
-				<input
-					type="password"
-					placeholder="Password"
-					className="login-input"
-				/>
-				<button className="login-button">Login</button>
-				<a
-					className="forgot-password-link"
-					href="#3"
-				>
-					Forgot Password?
-				</a>
-			</form>
-		</div>
+		<Layout>
+			<Router>
+				<Routes>
+					<Route
+						path="/"
+						element={<Home />}
+					/>
+					<Route
+						path="/course"
+						element={<CourseListPage />}
+					/>
+					<Route
+						path="/message"
+						element={<MessageListPage />}
+					/>
+				</Routes>
+			</Router>
+		</Layout>
 	);
 }
 
