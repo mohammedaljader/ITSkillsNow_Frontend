@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
 						</li>
 						<li className="nav-item login">
 							<a
-								href="/"
+								href="/signup"
 								className="nav-links"
 							>
 								Sign up
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
 						</li>
 						<li className="nav-item login">
 							<a
-								href="/"
+								href="/signin"
 								className="nav-links"
 							>
 								Sign in

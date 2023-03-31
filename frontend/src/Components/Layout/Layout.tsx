@@ -1,6 +1,7 @@
 import React from 'react';
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 import './css/Layout.css';
+import ResponsiveAppBar from '../MaterialUI/ResponsiveAppBar';
 
 export type MainLayoutProps = {
 	children: React.ReactNode;
@@ -9,7 +10,8 @@ export type MainLayoutProps = {
 const Layout: React.FC<MainLayoutProps> = ({ children }) => {
 	return (
 		<>
-			<Navbar />
+			{/* <Navbar /> */}
+			<ResponsiveAppBar />
 			<div className="main">{children}</div>
 		</>
 	);
