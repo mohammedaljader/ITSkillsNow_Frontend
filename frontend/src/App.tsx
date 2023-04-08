@@ -11,11 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Account } from './Components/User/Account';
 import { NewPassword } from './Components/Auth/NewPassword';
 import { NotFound } from './Components/MaterialUI/NotFound';
-// import AddCourse from './Components/Course/AddCourse';
+import AddCourse from './Components/Course/AddCourse';
 
 function App() {
 	return (
-		<Layout>
+		<>
 			<ToastContainer
 				position="bottom-right"
 				autoClose={5000}
@@ -27,47 +27,49 @@ function App() {
 				draggable
 				pauseOnHover
 			/>
-			<Router>
-				<Routes>
-					<Route
-						path="/"
-						element={<Home />}
-					/>
-					<Route
-						path="/profile"
-						element={<Account />}
-					/>
-					<Route
-						path="/newpassword"
-						element={<NewPassword />}
-					/>
-					<Route
-						path="/signin"
-						element={<SignIn />}
-					/>
-					<Route
-						path="/signup"
-						element={<SignUp />}
-					/>
-					<Route
-						path="/courses"
-						element={<CourseListPage />}
-					/>
-					{/* <Route
-						path="/addCourse"
-						element={<AddCourse />}
-					/> */}
-					<Route
-						path="/jobs"
-						element={<MessageListPage />}
-					/>
-					<Route
-						path="*"
-						element={<NotFound />}
-					/>
-				</Routes>
-			</Router>
-		</Layout>
+			<Layout>
+				<Router>
+					<Routes>
+						<Route
+							path="/"
+							element={<Home />}
+						/>
+						<Route
+							path="/profile"
+							element={<Account />}
+						/>
+						<Route
+							path="/newpassword"
+							element={<NewPassword />}
+						/>
+						<Route
+							path="/signin"
+							element={<SignIn />}
+						/>
+						<Route
+							path="/signup"
+							element={<SignUp />}
+						/>
+						<Route
+							path="/courses"
+							element={<CourseListPage />}
+						/>
+						<Route
+							path="/addCourse"
+							element={<AddCourse />}
+						/>
+						<Route
+							path="/jobs"
+							element={<MessageListPage />}
+						/>
+						<Route
+							path="*"
+							element={<NotFound />}
+						/>
+					</Routes>
+				</Router>
+			</Layout>
+		</>
 	);
 }
 
