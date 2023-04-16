@@ -27,7 +27,8 @@ export const NotFound = () => {
 						<br></br>
 						<Button
 							variant="contained"
-							onClick={() => navigate(-1)}
+							// onClick={() => navigate(-1)}
+							onClick={() => navigate('')}
 						>
 							Back Home
 						</Button>

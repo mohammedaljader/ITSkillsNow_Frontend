@@ -5,7 +5,7 @@ import SignUp from './Components/Auth/SignUp';
 import Layout from './Components/Layout/Layout';
 import CourseListPage from './Pages/CourseListPage';
 import Home from './Pages/Home';
-import MessageListPage from './Pages/MessageListPage';
+import JobListPage from './Pages/JobListPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Account } from './Components/User/Account';
@@ -60,7 +60,7 @@ function App() {
 						/>
 						<Route
 							path="/jobs"
-							element={<MessageListPage />}
+							element={<JobListPage />}
 						/>
 						<Route
 							path="*"

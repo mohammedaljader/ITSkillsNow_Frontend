@@ -1,22 +1,27 @@
 import React from 'react';
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { AccountProfile } from './AccountProfile';
 import AccountProfileDetails from './AccountProfileDetails';
-// Typography
+import AuthApi from '../../Data/Auth';
+import LoadingComponent from '../MaterialUI/LoadingComponent';
 
 export const Account = () => {
+	const isUser = AuthApi.getUser();
+
+	if (!isUser) return <LoadingComponent />;
+
 	return (
 		<Box
 			component="main"
 			sx={{ flexGrow: 1, py: 1 }}
 		>
 			<Container maxWidth="lg">
-				{/* <Typography
+				<Typography
 					sx={{ mb: 3 }}
 					variant="h4"
 				>
 					Profile
-				</Typography> */}
+				</Typography>
 				<Grid
 					container
 					spacing={3}

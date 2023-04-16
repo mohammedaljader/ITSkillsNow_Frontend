@@ -1,6 +1,5 @@
 import React from 'react';
-// import CourseList from '../Components/Course/CourseList';
-// import CourseApi, { Course } from '../Data/course';
+// import CourseApi, { Message } from '../Data/course';
 import LoadingComponent from '../Components/MaterialUI/LoadingComponent';
 // import { toast } from 'react-toastify';
 // import { useNavigate } from 'react-router-dom';
@@ -10,19 +9,17 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import AuthApi from '../Data/Auth';
 
-const CourseListPage: React.FC = () => {
+const JobListPage: React.FC = () => {
 	const isAuth = AuthApi.getUser();
-	// const [courses, setCourses] = useState<Course[]>();
 	// const navigate = useNavigate();
 
 	// useEffect(() => {
 	// 	let isMounted = true; // Keep track of whether the component is mounted
-
-	// 	CourseApi.getCourses()
+	// 	CourseApi.getMessages()
 	// 		.then((res) => {
 	// 			if (isMounted) {
 	// 				// Check if the component is still mounted before updating state
-	// 				setCourses(res);
+	// 				setMessage(res);
 	// 			}
 	// 		})
 	// 		.catch((err) => {
@@ -37,10 +34,6 @@ const CourseListPage: React.FC = () => {
 	// 		isMounted = false; // Set isMounted to false when the component is unmounted
 	// 	};
 	// }, [navigate]);
-
-	// const handleAddCourse = () => {
-	// 	CourseApi.addCourse({ courseName: 'NewCourse' });
-	// };
 
 	if (!isAuth) return <LoadingComponent />;
 
@@ -61,7 +54,7 @@ const CourseListPage: React.FC = () => {
 						color="text.primary"
 						gutterBottom
 					>
-						IT Courses
+						IT Jobs
 					</Typography>
 				</Container>
 			</Box>
@@ -70,4 +63,4 @@ const CourseListPage: React.FC = () => {
 	);
 };
 
-export default CourseListPage;
+export default JobListPage;

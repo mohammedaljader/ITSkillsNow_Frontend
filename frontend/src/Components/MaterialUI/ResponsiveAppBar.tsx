@@ -13,8 +13,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Logo } from './Logo';
 import AuthApi from '../../Data/Auth';
+import { Link } from 'react-router-dom';
 
-const pages = ['home', 'courses', 'jobs'];
+const pages = ['home', 'About us'];
+const adminPage = ['home', 'courses', 'jobs'];
 const settings = ['Profile', 'Logout'];
 
 const navigatePages = (page: string) => {
@@ -110,15 +112,25 @@ function ResponsiveAppBar() {
 								display: { xs: 'block', md: 'none' },
 							}}
 						>
-							{pages.map((page) => (
-								<MenuItem
-									key={page}
-									onClick={handleCloseNavMenu}
-									href={`/${navigatePages(page)}`}
-								>
-									<Typography textAlign="center">{page}</Typography>
-								</MenuItem>
-							))}
+							{isAuth
+								? adminPage.map((page) => (
+										<MenuItem
+											key={page}
+											onClick={handleCloseNavMenu}
+											href={`/${navigatePages(page)}`}
+										>
+											<Typography textAlign="center">{page}</Typography>
+										</MenuItem>
+								  ))
+								: pages.map((page) => (
+										<MenuItem
+											key={page}
+											onClick={handleCloseNavMenu}
+											href={`/${navigatePages(page)}`}
+										>
+											<Typography textAlign="center">{page}</Typography>
+										</MenuItem>
+								  ))}
 						</Menu>
 					</Box>
 
@@ -126,17 +138,29 @@ function ResponsiveAppBar() {
 					<Logo IsFlexGrow={true} />
 
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-						{pages.map((page) => (
-							<Button
-								key={page}
-								onClick={handleCloseNavMenu}
-								style={{ marginBottom: '10px' }}
-								sx={{ my: 2, color: 'white', display: 'block' }}
-								href={`/${navigatePages(page)}`}
-							>
-								{page}
-							</Button>
-						))}
+						{isAuth
+							? adminPage.map((page) => (
+									<Button
+										key={page}
+										onClick={handleCloseNavMenu}
+										style={{ marginBottom: '10px' }}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+										href={`/${navigatePages(page)}`}
+									>
+										{page}
+									</Button>
+							  ))
+							: pages.map((page) => (
+									<Button
+										key={page}
+										onClick={handleCloseNavMenu}
+										style={{ marginBottom: '10px' }}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+										href={`/${navigatePages(page)}`}
+									>
+										{page}
+									</Button>
+							  ))}
 					</Box>
 
 					{isAuth ? (
@@ -171,6 +195,8 @@ function ResponsiveAppBar() {
 								{settings.map((setting) => (
 									<MenuItem
 										key={setting}
+										component={'a'}
+										href={setting === 'Profile' ? `/${setting}` : ''}
 										onClick={() => handleCloseUserMenu(setting)}
 									>
 										<Typography textAlign="center">{setting}</Typography>
