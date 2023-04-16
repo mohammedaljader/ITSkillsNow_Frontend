@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Account } from './Components/User/Account';
 import { NewPassword } from './Components/Auth/NewPassword';
 import { NotFound } from './Components/MaterialUI/NotFound';
-import AddCourse from './Components/Course/AddCourse';
+import {AddCourse} from './Components/Course/AddCourse';
 
 function App() {
 	return (

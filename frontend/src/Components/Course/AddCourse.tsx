@@ -1,110 +1,87 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import CustomEditor from './CustomEditor';
+import * as React from 'react';
+import { useState } from 'react';
+import {
+	Button,
+	TextField,
+	MenuItem,
+	Typography,
+	Card,
+	CardContent,
+	Box,
+} from '@mui/material';
+import { Editor } from './Editor';
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		display: 'flex',
-		flexDirection: 'column',
-		'& > *': {
-			marginBottom: theme.spacing(2),
-		},
-	},
-	editor: {
-		marginTop: theme.spacing(2),
-	},
-}));
+interface CourseFormProps {
+	onSubmit?: (formData: {
+		title: string;
+		description: string;
+		category: string;
+	}) => void;
+}
 
-const AddCourse: React.FC = () => {
-	const classes = useStyles();
-	const [courseName, setCourseName] = useState('');
-	const [courseSalary, setCourseSalary] = useState(0);
-	const [courseType, setCourseType] = useState('');
+export const AddCourse: React.FC<CourseFormProps> = ({ onSubmit }) => {
+	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
+	const [category, setCategory] = useState('');
 
-	const handleCourseNameChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setCourseName(event.target.value);
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		// onSubmit({ title, description, category });
 	};
-
-	const handleCourseSalaryChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setCourseSalary(parseFloat(event.target.value));
-	};
-
-	const handleCourseTypeChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setCourseType(event.target.value);
-	};
-
-	const handleDescriptionChange = (value: string) => {
-		setDescription(value);
-	};
-
-	const courseTypes = [
-		{
-			value: 'beginner',
-			label: 'Beginner',
-		},
-		{
-			value: 'intermediate',
-			label: 'Intermediate',
-		},
-		{
-			value: 'advanced',
-			label: 'Advanced',
-		},
-	];
 
 	return (
-		<Box mt={2}>
-			<form
-				className={classes.root}
-				noValidate
-				autoComplete="off"
-			>
-				<TextField
-					id="course-name"
-					label="Course Name"
-					value={courseName}
-					onChange={handleCourseNameChange}
-				/>
-				<TextField
-					id="course-salary"
-					label="Course Salary"
-					type="number"
-					value={courseSalary}
-					onChange={handleCourseSalaryChange}
-				/>
-				<TextField
-					id="course-type"
-					select
-					label="Course Type"
-					value={courseType}
-					onChange={handleCourseTypeChange}
-				>
-					{courseTypes.map((option) => (
-						<MenuItem
-							key={option.value}
-							value={option.value}
+		<Box sx={{ backgroundColor: '#fff' }}>
+			<Card>
+				<CardContent>
+					<Typography
+						variant="h5"
+						component="h2"
+						gutterBottom
+					>
+						Add Course
+					</Typography>
+					<form onSubmit={handleSubmit}>
+						<TextField
+							label="Title"
+							value={title}
+							onChange={(event) => setTitle(event.target.value)}
+							fullWidth
+							margin="normal"
+							required
+						/>
+						<TextField
+							label="Description"
+							value={description}
+							onChange={(event) => setDescription(event.target.value)}
+							fullWidth
+							margin="normal"
+							required
+						/>
+						<TextField
+							select
+							label="Category"
+							value={category}
+							onChange={(event) => setCategory(event.target.value)}
+							fullWidth
+							margin="normal"
+							required
 						>
-							{option.label}
-						</MenuItem>
-					))}
-				</TextField>
-				<CustomEditor
-					value={description}
-					onChange={handleDescriptionChange}
-				/>
-			</form>
+							<MenuItem value="web">Web Development</MenuItem>
+							<MenuItem value="mobile">Mobile Development</MenuItem>
+							<MenuItem value="game">Game Development</MenuItem>
+						</TextField>
+						<Editor text='Description' setContent={setCategory}/>
+						<Button
+							variant="contained"
+							type="submit"
+							color="primary"
+							style={{ marginTop: '15px' }}
+						>
+							Submit
+						</Button>
+					</form>
+				</CardContent>
+			</Card>
 		</Box>
 	);
 };
-
-export default AddCourse;

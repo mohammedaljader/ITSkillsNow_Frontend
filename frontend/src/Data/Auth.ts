@@ -22,14 +22,14 @@ const getUrl = (param: string): string => {
 
 export default class AuthApi {
 	static async signIn(payload: signin): Promise<tokenResponse> {
-		const response = await axios.post<tokenResponse>(getUrl('/login'), payload);
+		const response = await axios.post<tokenResponse>(getUrl('login'), payload);
         localStorage.setItem('user', JSON.stringify(response.data));
 		return response.data;
 	}
 
 
     static async signUp(payload: signup): Promise<string> {
-		const response = await axios.post<string>(getUrl('/register'), payload);
+		const response = await axios.post<string>(getUrl('register'), payload);
 		return response.data;
 	}
 
