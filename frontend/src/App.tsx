@@ -11,7 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Account } from './Components/User/Account';
 import { NewPassword } from './Components/Auth/NewPassword';
 import { NotFound } from './Components/MaterialUI/NotFound';
-import {AddCourse} from './Components/Course/AddCourse';
+import { AddCourse } from './Components/Course/AddCourse';
+import AboutUs from './Components/MaterialUI/AboutUs';
 
 function App() {
 	return (
@@ -27,8 +28,8 @@ function App() {
 				draggable
 				pauseOnHover
 			/>
-			<Layout>
-				<Router>
+			<Router>
+				<Layout>
 					<Routes>
 						<Route
 							path="/"
@@ -63,12 +64,16 @@ function App() {
 							element={<JobListPage />}
 						/>
 						<Route
+							path="/aboutus"
+							element={<AboutUs />}
+						/>
+						<Route
 							path="*"
 							element={<NotFound />}
 						/>
 					</Routes>
-				</Router>
-			</Layout>
+				</Layout>
+			</Router>
 		</>
 	);
 }

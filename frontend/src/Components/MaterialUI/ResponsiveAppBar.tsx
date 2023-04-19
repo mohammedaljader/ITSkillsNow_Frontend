@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Logo } from './Logo';
 import AuthApi from '../../Data/Auth';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const pages = ['home', 'About us'];
 const adminPage = ['home', 'courses', 'jobs'];
@@ -22,6 +22,9 @@ const settings = ['Profile', 'Logout'];
 const navigatePages = (page: string) => {
 	if (page === 'home') {
 		return '';
+	}
+	if (page === 'About us') {
+		return 'aboutus';
 	}
 	return page;
 };
@@ -45,6 +48,7 @@ const navigatePages = (page: string) => {
 
 function ResponsiveAppBar() {
 	const isAuth = AuthApi.getUser();
+	const navigate = useNavigate();
 
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
 		null
@@ -67,12 +71,9 @@ function ResponsiveAppBar() {
 	const handleCloseUserMenu = (setting: string) => {
 		if (setting === 'Logout') {
 			AuthApi.logout();
+			navigate('/');
 			window.location.reload();
 		}
-
-		// if (setting === 'Profile') {
-		// 	navigate('/profile');
-		// }
 		setAnchorElUser(null);
 	};
 
