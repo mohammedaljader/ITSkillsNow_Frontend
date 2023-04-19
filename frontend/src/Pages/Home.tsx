@@ -11,6 +11,7 @@ import { CardList } from '../Components/MaterialUI/CardList';
 const theme = createTheme();
 
 export default function Home() {
+	console.log(process.env.API_HOST);
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
