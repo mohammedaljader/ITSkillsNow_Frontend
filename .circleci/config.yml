@@ -3,8 +3,21 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node@4.7
+      - image: circleci/node:16.13.0
     steps:
       - checkout
       - run: yarn install
+      - run: yarn build
       - run: npx cypress run
+
+  setup_remote_docker:
+    docker:
+      - image: docker:20.10.10-dind
+    steps:
+      - setup_remote_docker
+
+workflows:
+  build-and-test:
+    jobs:
+      - setup_remote_docker
+      - build
