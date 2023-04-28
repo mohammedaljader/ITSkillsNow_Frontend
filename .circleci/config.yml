@@ -1,10 +1,52 @@
-version: 2.1
-
+version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:18.14.0
+      - image: circleci/node:12
     steps:
       - checkout
-      - run: yarn install
-      - run: npx cypress run
+      - restore_cache:
+          key: dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: dependencies-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+  e2e:
+    docker:
+      - image: cypress/browsers:node11.13.0-chrome73
+        environment:
+          TERM: xterm
+    steps:
+      - checkout
+      - restore_cache:
+          key: e2e-cache-{{ checksum "package.json" }}
+      - run:
+          name: install ci dependencies
+          command: yarn install
+      - save_cache:
+          key: e2e-cache-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run:
+          name: Bundle the code
+          command: yarn build
+      - run:
+          name: Launch server
+          command: yarn start
+          background: true
+      - run:
+          name: Run E2E tests
+          command: npx cypress run
+      - store_test_results:
+          path: results
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - build
+      - e2e
