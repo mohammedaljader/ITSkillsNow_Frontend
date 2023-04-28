@@ -9,4 +9,4 @@ workflows:
       - cypress/run:
           package-manager: 'yarn'
           start-command: 'yarn start'
-          working-directory: '/frontend'
+          working-directory: frontend
