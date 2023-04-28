@@ -4,7 +4,7 @@ describe('Home page tests', () => {
 	});
 
 	it('Home page with title and description ', () => {
-		cy.contains('Dicover new IT courses');
+		cy.contains('Discover new IT courses');
 		cy.contains(
 			'Start, switch, or advance your career with more than 5,400 courses, Professional Certificates, and degrees from world-class universities and companies.'
 		);
