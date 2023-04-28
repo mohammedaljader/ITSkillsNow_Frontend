@@ -4,5 +4,5 @@ orbs:
 workflows: 
   build:
     jobs:
-      - cypress/E2E: 
+      - cypress/run: 
           command: npx cypress run --headless 
