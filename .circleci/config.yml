@@ -1,9 +1,18 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@3
+  cypress: cypress-io/cypress@1
+  react: thefrontside/react@0.1.0
 workflows:
-  test:
+  push:
+    jobs:
+      - react/install
+      - react/test:
+          requires:
+            - react/install
+  build:
     jobs:
       - cypress/run:
-          package-manager: 'yarn'
-          start-command: 'yarn start'
+          yarn: true
+          start: yarn start
+          wait-on: 'http://localhost:3000'
+          no-workspace: true
