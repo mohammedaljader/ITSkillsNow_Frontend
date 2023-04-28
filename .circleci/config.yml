@@ -1,36 +1,8 @@
-version: 2
-jobs:
+version: 2.1
+orbs: 
+  cypress: cypress-io/cypress@1
+workflows: 
   build:
-    docker:
-      - image: circleci/node:12
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependencies-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          key: dependencies-{{ checksum "package.json" }}
-          paths:
-            - ./node_modules
-  e2e:
-    docker:
-      - image: cypress/browsers:node11.13.0-chrome73
-        environment:
-          TERM: xterm
-    steps:
-      - checkout
-      - run:
-          name: install ci dependencies
-          command: yarn install
-      - run:
-          name: Run E2E tests
-          command: npx cypress run
-
-workflows:
-  version: 2
-  ci:
     jobs:
-      - build
-      - e2e
+      - cypress/run: 
+          command: npx cypress run --headless 
