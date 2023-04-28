@@ -1,11 +1,12 @@
-version: '2.1'
+version: 2.1
+
 orbs:
   cypress: cypress-io/cypress@3
+
 workflows:
-  use-my-orb:
+  test:
     jobs:
       - cypress/run:
-          cypress-cache-key: custom-cypress-cache-v1-{{ arch }}-{{ checksum "package.json" }}
-          cypress-cache-path: ~/.cache/custom-dir/Cypress
-          cypress-command: npx cypress run --component
-          node-cache-version: v2
+          package-manager: 'yarn'
+          start-command: 'yarn start'
+          working_directory: '/frontend'
