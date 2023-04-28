@@ -1,11 +1,11 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@4.7
-  
-workflows:
-  test: 
-    jobs:
-      - node/test:
-          version: '16.10'
-          pkg-manager: yarn
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn build
+      - run: yarn cypress run
