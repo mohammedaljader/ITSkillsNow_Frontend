@@ -7,5 +7,4 @@ jobs:
     steps:
       - checkout
       - run: yarn install
-      - run: yarn build
-      - run: yarn cypress run
+      - run: npx cypress run
