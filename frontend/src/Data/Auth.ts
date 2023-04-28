@@ -1,4 +1,5 @@
 import axios from 'axios';
+import AuthHeader from './AuthHeader';
 
 interface signin {
 	username: string;
@@ -9,6 +10,11 @@ interface signup {
 	fullName: string;
 	username: string;
 	email: string;
+	password: string;
+}
+
+interface deleteAccount {
+	username: string;
 	password: string;
 }
 
@@ -23,27 +29,40 @@ const getUrl = (param: string): string => {
 export default class AuthApi {
 	static async signIn(payload: signin): Promise<tokenResponse> {
 		const response = await axios.post<tokenResponse>(getUrl('login'), payload);
-        localStorage.setItem('user', JSON.stringify(response.data));
+		localStorage.setItem('user', JSON.stringify(response.data));
 		return response.data;
 	}
 
-
-    static async signUp(payload: signup): Promise<string> {
+	static async signUp(payload: signup): Promise<string> {
 		const response = await axios.post<string>(getUrl('register'), payload);
 		return response.data;
 	}
 
+	static async deleteme(payload: deleteAccount): Promise<boolean> {
+		const response = await axios.post<boolean>(getUrl('deleteMe'), payload, {
+			headers: { Authorization: AuthHeader() },
+		});
+		return response.data;
+	}
 
-    static logout(): void {
-        localStorage.removeItem('user');
-    }
+	static logout(): void {
+		localStorage.removeItem('user');
+	}
 
-	static getUser(): boolean{
-		const user = localStorage.getItem('user')
-		if(user){
+	static getUser(): boolean {
+		const user = localStorage.getItem('user');
+		if (user) {
 			return true;
 		}
 		return false;
 	}
-}
 
+	static getUsername(): string {
+		const userStorage = localStorage.getItem('user');
+		if (userStorage) {
+			const user = JSON.parse(userStorage);
+			return user.username;
+		}
+		return '';
+	}
+}

@@ -31,7 +31,7 @@ export default function Home() {
 							color="text.primary"
 							gutterBottom
 						>
-							Dicover new IT courses
+							Discover new IT courses
 						</Typography>
 						<Typography
 							variant="h5"
