@@ -71,8 +71,7 @@ export default function SignUp() {
 					navigate('/signin');
 				})
 				.catch((err) => {
-					// console.log(err);
-					toast.error("Failed to creat an account, please try again!")
+					toast.error("Failed to create an account, please try again!")
 				});
 		}
 	};
@@ -121,6 +120,7 @@ export default function SignUp() {
 									id="firstName"
 									label="First Name"
 									autoFocus
+									data-testid="firstname-field"
 								/>
 							</Grid>
 							<Grid
@@ -135,6 +135,7 @@ export default function SignUp() {
 									label="Last Name"
 									name="lastName"
 									autoComplete="family-name"
+									data-testid="lastname-field"
 								/>
 							</Grid>
 							<Grid
@@ -148,6 +149,7 @@ export default function SignUp() {
 									label="Username"
 									name="username"
 									autoComplete="username"
+									data-testid="username-field"
 								/>
 							</Grid>
 							<Grid
@@ -161,6 +163,7 @@ export default function SignUp() {
 									label="Email Address"
 									name="email"
 									autoComplete="email"
+									data-testid="email-field"
 								/>
 							</Grid>
 							<Grid
@@ -175,6 +178,7 @@ export default function SignUp() {
 									type="password"
 									id="password"
 									autoComplete="new-password"
+									data-testid="password-field"
 								/>
 							</Grid>
 						</Grid>
@@ -183,6 +187,7 @@ export default function SignUp() {
 							fullWidth
 							variant="contained"
 							sx={{ mt: 3, mb: 2 }}
+							data-testid="signup-button"
 						>
 							Sign Up
 						</Button>
@@ -194,6 +199,7 @@ export default function SignUp() {
 								<Link
 									href="/signin"
 									variant="body2"
+									data-testid="signin-button"
 								>
 									Already have an account? Sign in
 								</Link>

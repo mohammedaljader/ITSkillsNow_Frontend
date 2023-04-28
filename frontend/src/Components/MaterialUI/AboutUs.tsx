@@ -55,12 +55,15 @@ const AboutUs = () => {
 						<div className={classes.socialMediaIconsContainer}>
 							<LinkedInIcon
 								onClick={() => window.open('https://www.linkedin.com/')}
+								data-testid="linkedIn-button"
 							/>
 							<TwitterIcon
 								onClick={() => window.open('https://www.twitter.com/')}
+								data-testid="twitter-button"
 							/>
 							<GitHubIcon
 								onClick={() => window.open('https://www.facebook.com/')}
+								data-testid="github-button"
 							/>
 						</div>
 					</CardContent>

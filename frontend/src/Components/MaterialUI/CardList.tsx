@@ -15,8 +15,8 @@ export const CardList = () => {
 		<Container
 			sx={{ py: 8 }}
 			maxWidth="md"
+			data-testid="courses"
 		>
-			{/* End hero unit */}
 			<Grid
 				container
 				spacing={4}

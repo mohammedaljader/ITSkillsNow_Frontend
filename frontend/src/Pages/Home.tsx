@@ -49,8 +49,18 @@ export default function Home() {
 							spacing={2}
 							justifyContent="center"
 						>
-							<Button variant="contained">Suggested jobs</Button>
-							<Button variant="outlined">Suggested Courses</Button>
+							<Button
+								variant="contained"
+								data-testid="suggested-jobs-button"
+							>
+								Suggested jobs
+							</Button>
+							<Button
+								variant="outlined"
+								data-testid="suggested-courses-button"
+							>
+								Suggested Courses
+							</Button>
 						</Stack>
 					</Container>
 				</Box>

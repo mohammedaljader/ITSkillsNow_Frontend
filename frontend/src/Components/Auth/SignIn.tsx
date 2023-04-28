@@ -20,7 +20,6 @@ export const SignIn = () => {
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log(`Username: ${username}, Password: ${password}`);
 		AuthApi.signIn({ username: username, password: password })
 			.then((res) => {
 				// console.log(res.accessToken);
@@ -70,6 +69,7 @@ export const SignIn = () => {
 						name="username"
 						autoComplete="username"
 						autoFocus
+						data-testid="username-field"
 						onChange={(event) => setUsername(event.target.value)}
 					/>
 					<TextField
@@ -81,6 +81,7 @@ export const SignIn = () => {
 						type="password"
 						id="password"
 						autoComplete="current-password"
+						data-testid="password-field"
 						onChange={(event) => setPassword(event.target.value)}
 					/>
 					<FormControlLabel
@@ -90,6 +91,7 @@ export const SignIn = () => {
 								color="primary"
 							/>
 						}
+						data-testid="rememberme-radiobutton"
 						label="Remember me"
 					/>
 					<Button
@@ -97,6 +99,7 @@ export const SignIn = () => {
 						fullWidth
 						variant="contained"
 						sx={{ mt: 3, mb: 2 }}
+						data-testid="signin-button"
 					>
 						Sign In
 					</Button>
@@ -108,6 +111,7 @@ export const SignIn = () => {
 							<Link
 								href="/newpassword"
 								variant="body2"
+								data-testid="forgetpassword-button"
 							>
 								Forgot password?
 							</Link>
@@ -116,6 +120,7 @@ export const SignIn = () => {
 							<Link
 								href="/signup"
 								variant="body2"
+								data-testid="signup-button"
 							>
 								{"Don't have an account? Sign Up"}
 							</Link>
