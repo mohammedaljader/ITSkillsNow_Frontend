@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { Logo } from './Logo';
 import AuthApi from '../../Data/Auth';
 import { useNavigate } from 'react-router-dom';
+import { isTokenExpired } from '../../Utils/isTokenExpired';
 
 const pages = ['home', 'About us'];
 const adminPage = ['home', 'courses', 'jobs'];
@@ -49,6 +50,20 @@ const navigatePages = (page: string) => {
 function ResponsiveAppBar() {
 	const isAuth = AuthApi.getUser();
 	const navigate = useNavigate();
+	const user = AuthApi.getUserResponse();
+
+	React.useEffect(() => {
+		const interval = setInterval(() => {
+			if (user !== null) {
+				const exp = isTokenExpired(user?.accessToken);
+				if (exp) {
+					AuthApi.logout();
+					navigate('/signin');
+				}
+			}
+		}, 5000);
+		return () => clearInterval(interval);
+	}, [navigate, user]);
 
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
 		null

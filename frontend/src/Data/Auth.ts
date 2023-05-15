@@ -22,6 +22,14 @@ interface tokenResponse {
 	accessToken: string;
 }
 
+interface User {
+	accessToken: string;
+	refreshToken: string;
+	username: string;
+	fullName: string;
+	roles: string[];
+}
+
 const getUrl = (param: string): string => {
 	return `http://localhost:8080/auth/${param}`;
 };
@@ -55,6 +63,15 @@ export default class AuthApi {
 			return true;
 		}
 		return false;
+	}
+
+	static getUserResponse(): User | null {
+		const userStorage = localStorage.getItem('user');
+		if (userStorage) {
+			const user = JSON.parse(userStorage);
+			return user;
+		}
+		return null;
 	}
 
 	static getUsername(): string {
