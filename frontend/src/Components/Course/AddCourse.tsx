@@ -70,7 +70,7 @@ export const AddCourse: React.FC<CourseFormProps> = ({ onSubmit }) => {
 							<MenuItem value="mobile">Mobile Development</MenuItem>
 							<MenuItem value="game">Game Development</MenuItem>
 						</TextField>
-						<Editor text='Description' setContent={setCategory}/>
+						<Editor setContent={setCategory} />
 						<Button
 							variant="contained"
 							type="submit"

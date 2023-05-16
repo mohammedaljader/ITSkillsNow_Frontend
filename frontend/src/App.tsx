@@ -11,7 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Account } from './Components/User/Account';
 import { NewPassword } from './Components/Auth/NewPassword';
 import { NotFound } from './Components/MaterialUI/NotFound';
-import { AddCourse } from './Components/Course/AddCourse';
+// import { AddCourse } from './Components/Course/AddCourse';
+import Checkout from './Components/Course/AddCourse/Checkout';
 import AboutUs from './Components/MaterialUI/AboutUs';
 
 function App() {
@@ -57,7 +58,7 @@ function App() {
 						/>
 						<Route
 							path="/addCourse"
-							element={<AddCourse />}
+							element={<Checkout />}
 						/>
 						<Route
 							path="/jobs"

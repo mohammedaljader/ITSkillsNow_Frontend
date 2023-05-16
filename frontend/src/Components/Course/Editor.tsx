@@ -4,7 +4,6 @@ import SunEditorCore from 'suneditor/src/lib/core';
 import 'suneditor/dist/css/suneditor.min.css';
 
 interface editorProps {
-	text: string;
 	defaultValue?: string;
 	setContent: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -22,7 +21,6 @@ export const Editor = (props: editorProps) => {
 
 	return (
 		<div>
-			<p> {props.text} </p>
 			<SunEditor
 				getSunEditorInstance={getSunEditorInstance}
 				lang="en"
