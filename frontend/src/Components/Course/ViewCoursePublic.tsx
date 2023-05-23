@@ -9,7 +9,7 @@ import {
 	Box,
 } from '@mui/material';
 import LoadingComponent from '../MaterialUI/LoadingComponent';
-import CourseApi, { CourseView } from '../../Data/course';
+import CourseApi, { CourseView } from '../../Data/Course';
 import parse from 'html-react-parser';
 import Tooltip from '@mui/material/Tooltip';
 import FavoriteIcon from '@mui/icons-material/Favorite';

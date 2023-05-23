@@ -1,6 +1,6 @@
 import axios from 'axios';
 import AuthHeader from './AuthHeader';
-import { CourseView } from './course';
+import { CourseView } from './Course';
 
 export interface AddCourseToFavorites {
 	courseId: string;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextField, Grid, MenuItem, Typography } from '@mui/material';
 import { FileInput } from '../../FileInput/FileInput';
-import { CourseType, CourseLanguage } from '../../../Data/course';
+import { CourseType, CourseLanguage } from '../../../Data/Course';
 
 interface courseDetailsProps {
 	setName: React.Dispatch<React.SetStateAction<string>>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/CourseList.css';
-import { Message } from '../../Data/course';
+import { Message } from '../../Data/Course';
 
 interface Props {
 	messages: Message[];
