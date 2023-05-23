@@ -14,7 +14,7 @@ import {
 	DialogTitle,
 } from '@mui/material';
 import LoadingComponent from '../MaterialUI/LoadingComponent';
-import CourseApi, { CourseView } from '../../Data/Course';
+import CourseApi, { CourseView } from '../../Data/course';
 import parse from 'html-react-parser';
 import Tooltip from '@mui/material/Tooltip';
 import EditIcon from '@mui/icons-material/Edit';

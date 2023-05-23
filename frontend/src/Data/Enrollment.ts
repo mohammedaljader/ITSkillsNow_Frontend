@@ -1,6 +1,6 @@
 import axios from 'axios';
 import AuthHeader from './AuthHeader';
-import { CourseView } from './Course';
+import { CourseView } from './course';
 
 export interface EnrollForCourse {
 	courseId: string;

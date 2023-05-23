@@ -9,12 +9,12 @@ import {
 	Box,
 } from '@mui/material';
 import LoadingComponent from '../MaterialUI/LoadingComponent';
-import CourseApi, { CourseView } from '../../Data/Course';
+import CourseApi, { CourseView } from '../../Data/course';
 import parse from 'html-react-parser';
 import Tooltip from '@mui/material/Tooltip';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton } from '@mui/material';
-import EnrollmentApi from '../../Data/Enrollment';
+import EnrollmentApi from '../../Data/enrollment';
 import AuthApi from '../../Data/Auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';

@@ -16,7 +16,7 @@ import CourseCententForm from './CourseCententForm';
 import Review from './Review';
 import { toast } from 'react-toastify';
 import AuthApi from '../../../Data/Auth';
-import CourseApi from '../../../Data/Course';
+import CourseApi from '../../../Data/course';
 import { Link } from 'react-router-dom';
 
 interface courseProps {
