@@ -131,7 +131,7 @@ export default function Checkout() {
 				})
 				.catch((err) => {
 					console.log(err);
-					toast.success('Error which adding course, please try again!');
+					toast.error('Error which adding course, please try again!');
 					setCourseAdded(false);
 				});
 		}
@@ -187,7 +187,13 @@ export default function Checkout() {
 								</Typography>
 							) : (
 								<Typography variant="subtitle1">
-									Please try again. <Link to="/addCourse">Add Course</Link>
+									Please try again.{' '}
+									<Link
+										onClick={() => window.location.reload()}
+										to="/addCourse"
+									>
+										Add Course
+									</Link>
 								</Typography>
 							)}
 						</React.Fragment>

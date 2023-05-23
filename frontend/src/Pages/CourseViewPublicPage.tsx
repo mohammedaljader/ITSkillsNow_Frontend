@@ -4,9 +4,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import AuthApi from '../Data/Auth';
-import { CourseList } from '../Components/Course/CouseList';
+import ViewCoursePublic from '../Components/Course/ViewCoursePublic';
 
-const CourseListPage: React.FC = () => {
+export const CourseViewPublicPage = () => {
 	const isAuth = AuthApi.getUser();
 
 	if (!isAuth) return <LoadingComponent />;
@@ -16,8 +16,8 @@ const CourseListPage: React.FC = () => {
 			<Box
 				sx={{
 					bgcolor: 'background.paper',
-					pt: 8,
-					pb: 6,
+					pt: 1,
+					pb: 1,
 				}}
 			>
 				<Container maxWidth="sm">
@@ -28,13 +28,11 @@ const CourseListPage: React.FC = () => {
 						color="text.primary"
 						gutterBottom
 					>
-						IT Courses
+						Coure View
 					</Typography>
 				</Container>
 			</Box>
-			<CourseList />
+			<ViewCoursePublic />
 		</main>
 	);
 };
-
-export default CourseListPage;

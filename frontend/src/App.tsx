@@ -11,9 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Account } from './Components/User/Account';
 import { NewPassword } from './Components/Auth/NewPassword';
 import { NotFound } from './Components/MaterialUI/NotFound';
-// import { AddCourse } from './Components/Course/AddCourse';
 import Checkout from './Components/Course/AddCourse/Checkout';
 import AboutUs from './Components/MaterialUI/AboutUs';
+import { CourseViewPublicPage } from './Pages/CourseViewPublicPage';
 
 function App() {
 	return (
@@ -39,6 +39,10 @@ function App() {
 						<Route
 							path="/profile"
 							element={<Account />}
+						/>
+						<Route
+							path="/v1/viewCourse/:courseId"
+							element={<CourseViewPublicPage />}
 						/>
 						<Route
 							path="/newpassword"

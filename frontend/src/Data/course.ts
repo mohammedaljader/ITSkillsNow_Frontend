@@ -17,7 +17,7 @@ export interface AddCourse {
 	username: string;
 }
 
-interface CourseView {
+export interface CourseView {
 	courseId: string;
 	courseName: string;
 	courseDescription: string;
@@ -60,10 +60,30 @@ export enum CourseLanguage {
 const url = 'http://localhost:8080/api/course';
 
 export default class CourseApi {
-	static async getCourses(): Promise<Course[]> {
-		const response = await axios.get<Course[]>(url, {
+	static async getCourses(): Promise<CourseView[]> {
+		const response = await axios.get<CourseView[]>(url, {
 			headers: { Authorization: AuthHeader() },
 		});
+		return response.data;
+	}
+
+	static async getCoursesByUsername(username: string): Promise<CourseView[]> {
+		const response = await axios.get<CourseView[]>(
+			url.concat('/user/').concat(username),
+			{
+				headers: { Authorization: AuthHeader() },
+			}
+		);
+		return response.data;
+	}
+
+	static async getCourseByCourseId(courseId: string): Promise<CourseView> {
+		const response = await axios.get<CourseView>(
+			url.concat('/').concat(courseId),
+			{
+				headers: { Authorization: AuthHeader() },
+			}
+		);
 		return response.data;
 	}
 
