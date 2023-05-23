@@ -16,6 +16,8 @@ import AboutUs from './Components/MaterialUI/AboutUs';
 import { CourseViewPublicPage } from './Pages/CourseViewPublicPage';
 import { CourseViewPage } from './Pages/CourseViewPage';
 import UpdateCourseCheckout from './Components/Course/UpdateCourse/UpdateCourseCheckout';
+import { EnrollmentsList } from './Components/Enrollment/EnrollmentsList';
+import { CourseFavoriteList } from './Components/Course/Favorites/CourseFavoriteList';
 
 function App() {
 	return (
@@ -41,6 +43,14 @@ function App() {
 						<Route
 							path="/profile"
 							element={<Account />}
+						/>
+						<Route
+							path="/enrollments"
+							element={<EnrollmentsList />}
+						/>
+						<Route
+							path="/favoritesCourses"
+							element={<CourseFavoriteList />}
 						/>
 						<Route
 							path="/v1/viewCourse/:courseId"

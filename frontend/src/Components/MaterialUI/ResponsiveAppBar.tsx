@@ -17,17 +17,26 @@ import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '../../Utils/isTokenExpired';
 
 const pages = ['home', 'About us'];
-const adminPage = ['home', 'courses', 'jobs'];
+const adminPage = [
+	'home',
+	'courses',
+	'jobs',
+	'enrollments',
+	'favorites Courses',
+];
 const settings = ['Profile', 'Logout'];
 
 const navigatePages = (page: string) => {
-	if (page === 'home') {
-		return '';
+	switch (page) {
+		case 'home':
+			return '';
+		case 'favorites Courses':
+			return 'favoritesCourses';
+		case 'About us':
+			return 'aboutus';
+		default:
+			return page;
 	}
-	if (page === 'About us') {
-		return 'aboutus';
-	}
-	return page;
 };
 
 // const routerPages = (page: string) => {
