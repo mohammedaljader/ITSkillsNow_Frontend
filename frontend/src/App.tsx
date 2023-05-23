@@ -15,6 +15,7 @@ import Checkout from './Components/Course/AddCourse/Checkout';
 import AboutUs from './Components/MaterialUI/AboutUs';
 import { CourseViewPublicPage } from './Pages/CourseViewPublicPage';
 import { CourseViewPage } from './Pages/CourseViewPage';
+import UpdateCourseCheckout from './Components/Course/UpdateCourse/UpdateCourseCheckout';
 
 function App() {
 	return (
@@ -48,6 +49,10 @@ function App() {
 						<Route
 							path="/course/:courseId"
 							element={<CourseViewPage />}
+						/>
+						<Route
+							path="/updateCourse/:courseId"
+							element={<UpdateCourseCheckout />}
 						/>
 						<Route
 							path="/newpassword"

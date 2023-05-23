@@ -94,6 +94,26 @@ export default class CourseApi {
 		return response.data;
 	}
 
+	static async updateCourse(payload: FormData): Promise<CourseView> {
+		const response = await axios.put<CourseView>(url, payload, {
+			headers: { Authorization: AuthHeader() },
+		});
+		return response.data;
+	}
+
+	static async updateCourseWithoutImage(
+		payload: CourseView
+	): Promise<CourseView> {
+		const response = await axios.put<CourseView>(
+			url.concat('/withoutImage'),
+			payload,
+			{
+				headers: { Authorization: AuthHeader() },
+			}
+		);
+		return response.data;
+	}
+
 	static async deleteCourse(courseId: string): Promise<boolean> {
 		const response = await axios.delete<boolean>(
 			url.concat('/').concat(courseId),

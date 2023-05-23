@@ -34,6 +34,10 @@ const ViewCourse = () => {
 		setOpen(true);
 	};
 
+	const navigateToUpdateCourse = (courseId: string) => {
+		navigate(`/updateCourse/${courseId}`);
+	};
+
 	const deleteHandler = (courseId: string) => {
 		CourseApi.deleteCourse(courseId)
 			.then(() => {
@@ -126,6 +130,7 @@ const ViewCourse = () => {
 								<IconButton
 									color="primary"
 									aria-label="Edit"
+									onClick={() => navigateToUpdateCourse(course.courseId)}
 								>
 									<EditIcon />
 								</IconButton>
