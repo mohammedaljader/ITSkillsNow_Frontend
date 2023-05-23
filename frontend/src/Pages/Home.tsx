@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CourseListPublic } from '../Components/Course/CourseListPublic';
+import { CardList } from '../Components/MaterialUI/CardList';
 
 const theme = createTheme();
 
@@ -64,7 +64,7 @@ export default function Home() {
 						</Stack>
 					</Container>
 				</Box>
-				<CourseListPublic />
+				<CardList />
 			</main>
 		</ThemeProvider>
 	);
