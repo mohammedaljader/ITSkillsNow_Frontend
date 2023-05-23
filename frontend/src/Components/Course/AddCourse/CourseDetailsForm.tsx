@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TextField, Grid, MenuItem, Typography } from '@mui/material';
 import { FileInput } from '../../FileInput/FileInput';
+import { CourseType, CourseLanguage } from '../../../Data/course';
 
 interface courseDetailsProps {
 	setName: React.Dispatch<React.SetStateAction<string>>;
@@ -85,9 +86,14 @@ export default function CourseDetailsForm({
 						value={type}
 						variant="standard"
 					>
-						<MenuItem value="web">Web Development</MenuItem>
-						<MenuItem value="mobile">Mobile Development</MenuItem>
-						<MenuItem value="game">Game Development</MenuItem>
+						{Object.values(CourseType).map((course) => (
+							<MenuItem
+								key={course}
+								value={course}
+							>
+								{course}
+							</MenuItem>
+						))}
 					</TextField>
 				</Grid>
 				<Grid
@@ -96,16 +102,21 @@ export default function CourseDetailsForm({
 				>
 					<TextField
 						select
-						label="course Language"
+						label="Course Language"
 						value={language}
 						onChange={(event) => setLanguage(event.target.value)}
 						fullWidth
 						autoComplete="shipping address-level3"
 						variant="standard"
 					>
-						<MenuItem value="web">Web Development</MenuItem>
-						<MenuItem value="mobile">Mobile Development</MenuItem>
-						<MenuItem value="game">Game Development</MenuItem>
+						{Object.values(CourseLanguage).map((language) => (
+							<MenuItem
+								key={language}
+								value={language}
+							>
+								{language}
+							</MenuItem>
+						))}
 					</TextField>
 				</Grid>
 

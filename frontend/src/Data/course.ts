@@ -35,6 +35,28 @@ export interface Message {
 	messageDate: string;
 }
 
+export enum CourseType {
+	COMPUTER_SCIENCE = 'Computer Science',
+	MATHEMATICS = 'Mathematics',
+	PHYSICS = 'Physics',
+	BIOLOGY = 'Biology',
+	HISTORY = 'History',
+	LITERATURE = 'Literature',
+	BUSINESS = 'Business',
+	PSYCHOLOGY = 'Psychology',
+	ART = 'Art',
+}
+
+export enum CourseLanguage {
+	ARABIC = 'Arabic',
+	ENGLISH = 'English',
+	SPANISH = 'Spanish',
+	FRENCH = 'French',
+	GERMAN = 'German',
+	CHINESE = 'Chinese',
+	JAPANESE = 'Japanese',
+}
+
 const url = 'http://localhost:8080/api/course';
 
 export default class CourseApi {
@@ -45,7 +67,7 @@ export default class CourseApi {
 		return response.data;
 	}
 
-	static async addCourse(payload: AddCourse): Promise<CourseView> {
+	static async addCourse(payload: FormData): Promise<CourseView> {
 		const response = await axios.post<CourseView>(url, payload, {
 			headers: { Authorization: AuthHeader() },
 		});

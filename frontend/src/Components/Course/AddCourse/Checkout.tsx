@@ -16,7 +16,8 @@ import CourseCententForm from './CourseCententForm';
 import Review from './Review';
 import { toast } from 'react-toastify';
 import AuthApi from '../../../Data/Auth';
-import CourseApi, { AddCourse } from '../../../Data/course';
+import CourseApi from '../../../Data/course';
+import { Link } from 'react-router-dom';
 
 interface courseProps {
 	setContent: React.Dispatch<React.SetStateAction<string>>;
@@ -81,6 +82,7 @@ export default function Checkout() {
 	const [language, setLanguage] = useState<string>('');
 	const [file, setFile] = useState<File | null>(null);
 	const [price, setPrice] = useState<number>(0);
+	const [courseAdded, setCourseAdded] = useState<boolean>(false);
 	const username = AuthApi.getUsername();
 
 	const props: courseProps = {
@@ -100,7 +102,6 @@ export default function Checkout() {
 
 	const handleNext = () => {
 		if (activeStep + 1 === steps.length) {
-			console.log(name, content, type, language, price, file);
 			if (
 				name === '' ||
 				content === '' ||
@@ -113,34 +114,25 @@ export default function Checkout() {
 				toast.error('All field are required!');
 				return;
 			}
-			// const data = new FormData();
-			// data.append('courseName', name);
-			// data.append('courseDescription', content);
-			// data.append('courseImage', file);
-			// data.append('coursePrice', price.toString());
-			// data.append('courseType', type);
-			// data.append('courseLanguage', language);
-			// data.append('isPublished', true);
-			// data.append('username', username);
+			const data = new FormData();
+			data.append('courseName', name);
+			data.append('courseDescription', content);
+			data.append('courseImage', file);
+			data.append('coursePrice', price.toString());
+			data.append('courseType', type);
+			data.append('courseLanguage', language);
+			data.append('isPublished', 'true');
+			data.append('username', username);
 
-			const payload: AddCourse = {
-				courseName: name,
-				courseDescription: content,
-				courseImage: file,
-				coursePrice: price,
-				courseType: type,
-				courseLanguage: language,
-				isPublished: true,
-				username: username,
-			};
-
-			CourseApi.addCourse(payload)
+			CourseApi.addCourse(data)
 				.then((res) => {
-					console.log(res);
+					toast.success('Course Added successfully!');
+					setCourseAdded(true);
 				})
 				.catch((err) => {
-                    console.log("YES ERROR")
 					console.log(err);
+					toast.success('Error which adding course, please try again!');
+					setCourseAdded(false);
 				});
 		}
 		setActiveStep(activeStep + 1);
@@ -185,13 +177,19 @@ export default function Checkout() {
 								variant="h5"
 								gutterBottom
 							>
-								Course Added successfully
+								{courseAdded ? 'Course Added successfully' : 'Oops!'}
 							</Typography>
-							<Typography variant="subtitle1">
-								Your order number is #2001539. We have emailed your order
-								confirmation, and will send you an update when your order has
-								shipped.
-							</Typography>
+							{courseAdded ? (
+								<Typography variant="subtitle1">
+									Your course is added successfully. You can now manage and add
+									content to your course.{' '}
+									<Link to="/courses">Go to My Courses</Link>
+								</Typography>
+							) : (
+								<Typography variant="subtitle1">
+									Please try again. <Link to="/addCourse">Add Course</Link>
+								</Typography>
+							)}
 						</React.Fragment>
 					) : (
 						<React.Fragment>
