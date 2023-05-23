@@ -14,6 +14,7 @@ import { NotFound } from './Components/MaterialUI/NotFound';
 import Checkout from './Components/Course/AddCourse/Checkout';
 import AboutUs from './Components/MaterialUI/AboutUs';
 import { CourseViewPublicPage } from './Pages/CourseViewPublicPage';
+import { CourseViewPage } from './Pages/CourseViewPage';
 
 function App() {
 	return (
@@ -43,6 +44,10 @@ function App() {
 						<Route
 							path="/v1/viewCourse/:courseId"
 							element={<CourseViewPublicPage />}
+						/>
+						<Route
+							path="/course/:courseId"
+							element={<CourseViewPage />}
 						/>
 						<Route
 							path="/newpassword"

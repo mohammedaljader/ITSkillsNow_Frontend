@@ -93,4 +93,14 @@ export default class CourseApi {
 		});
 		return response.data;
 	}
+
+	static async deleteCourse(courseId: string): Promise<boolean> {
+		const response = await axios.delete<boolean>(
+			url.concat('/').concat(courseId),
+			{
+				headers: { Authorization: AuthHeader() },
+			}
+		);
+		return response.data;
+	}
 }
