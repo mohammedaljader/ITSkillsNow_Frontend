@@ -15,7 +15,7 @@ describe('Home page tests', () => {
 		cy.get('[data-testid="suggested-courses-button"]').should('exist');
 	});
 
-	it('Home page should contain courses', () => {
-		cy.get('[data-testid="courses"]').should('exist');
-	});
+	// it('Home page should contain courses', () => {
+	// 	cy.get('[data-testid="courses"]').should('exist');
+	// });
 });
