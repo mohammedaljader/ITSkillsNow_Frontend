@@ -44,6 +44,7 @@ export const Account = () => {
 			.then(() => {
 				toast.success('Account deleted successfully!');
 				setTimeout(() => {
+					AuthApi.logout();
 					navigate('/');
 					window.location.reload();
 				}, 3000);
