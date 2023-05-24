@@ -11,8 +11,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Account } from './Components/User/Account';
 import { NewPassword } from './Components/Auth/NewPassword';
 import { NotFound } from './Components/MaterialUI/NotFound';
-import { AddCourse } from './Components/Course/AddCourse';
+import Checkout from './Components/Course/AddCourse/Checkout';
 import AboutUs from './Components/MaterialUI/AboutUs';
+import { CourseViewPublicPage } from './Pages/CourseViewPublicPage';
+import { CourseViewPage } from './Pages/CourseViewPage';
+import UpdateCourseCheckout from './Components/Course/UpdateCourse/UpdateCourseCheckout';
+import { EnrollmentsList } from './Components/Enrollment/EnrollmentsList';
+import { CourseFavoriteList } from './Components/Course/Favorites/CourseFavoriteList';
 
 function App() {
 	return (
@@ -40,6 +45,26 @@ function App() {
 							element={<Account />}
 						/>
 						<Route
+							path="/enrollments"
+							element={<EnrollmentsList />}
+						/>
+						<Route
+							path="/favoritesCourses"
+							element={<CourseFavoriteList />}
+						/>
+						<Route
+							path="/v1/viewCourse/:courseId"
+							element={<CourseViewPublicPage />}
+						/>
+						<Route
+							path="/course/:courseId"
+							element={<CourseViewPage />}
+						/>
+						<Route
+							path="/updateCourse/:courseId"
+							element={<UpdateCourseCheckout />}
+						/>
+						<Route
 							path="/newpassword"
 							element={<NewPassword />}
 						/>
@@ -57,7 +82,7 @@ function App() {
 						/>
 						<Route
 							path="/addCourse"
-							element={<AddCourse />}
+							element={<Checkout />}
 						/>
 						<Route
 							path="/jobs"
