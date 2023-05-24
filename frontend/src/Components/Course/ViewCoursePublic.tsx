@@ -17,14 +17,14 @@ import { IconButton } from '@mui/material';
 import EnrollmentApi from '../../Data/Enrollment';
 import AuthApi from '../../Data/Auth';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import FavoritesCourseApi from '../../Data/FavoriteCourse';
 
 const ViewCoursePublic = () => {
 	const { courseId } = useParams();
 	const [course, setCourse] = useState<CourseView>();
 	const username = AuthApi.getUsername();
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	useEffect(() => {
 		const getCourseByCourseId = async (courseId: string): Promise<void> => {
@@ -53,8 +53,11 @@ const ViewCoursePublic = () => {
 		if (courseId) {
 			EnrollmentApi.enrollToCourse({ courseId: courseId, username: username })
 				.then((res) => {
-					toast.success('You have enrolled successfully to this course!');
-					navigate('/');
+					if (res) {
+						toast.success('You have enrolled successfully to this course!');
+					} else {
+						toast.info('You already enrolled for this course!');
+					}
 				})
 				.catch((err) => {
 					toast.error('Something went wrong! please try again!');
@@ -70,8 +73,11 @@ const ViewCoursePublic = () => {
 				username: username,
 			})
 				.then((res) => {
-					toast.success('Course added successfully to your favoirte list!');
-					navigate('/');
+					if (res) {
+						toast.success('Course added successfully to your favoirte list!');
+					} else {
+						toast.info('Course already exists in your favorite list!');
+					}
 				})
 				.catch((err) => {
 					toast.error('Something went wrong! please try again!');

@@ -61,9 +61,7 @@ const url = 'http://localhost:8080/api/course';
 
 export default class CourseApi {
 	static async getCourses(): Promise<CourseView[]> {
-		const response = await axios.get<CourseView[]>(url, {
-			headers: { Authorization: AuthHeader() },
-		});
+		const response = await axios.get<CourseView[]>(url);
 		return response.data;
 	}
 

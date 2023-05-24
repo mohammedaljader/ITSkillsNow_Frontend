@@ -51,8 +51,11 @@ export const CourseFavoriteList = () => {
 			username: username,
 		})
 			.then((res) => {
-				toast.success('You have enrolled successfully to this course!');
-				navigate('/');
+				if (res) {
+					toast.success('You have enrolled successfully to this course!');
+				} else {
+					toast.info('You already enrolled for this course!');
+				}
 			})
 			.catch((err) => {
 				console.log(err);
