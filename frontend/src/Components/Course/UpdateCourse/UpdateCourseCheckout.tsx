@@ -19,6 +19,7 @@ import AuthApi from '../../../Data/Auth';
 import CourseApi, { CourseView } from '../../../Data/course';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import LoadingComponent from '../../MaterialUI/LoadingComponent';
 
 interface courseProps {
 	setContent: React.Dispatch<React.SetStateAction<string>>;
@@ -86,6 +87,7 @@ export default function UpdateCourseCheckout() {
 	const [image, setImage] = useState<string>('');
 	const [price, setPrice] = useState<number>(0);
 	const [courseUpdated, setCourseUpdated] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 	const username = AuthApi.getUsername();
 
 	const getCourseByCourseId = async (courseId: string): Promise<void> => {
@@ -151,11 +153,13 @@ export default function UpdateCourseCheckout() {
 				CourseApi.updateCourse(data)
 					.then((res) => {
 						toast.success('Course updated successfully!');
+						setLoading(false);
 						setCourseUpdated(true);
 					})
 					.catch((err) => {
 						console.log(err);
 						toast.error('Error which updating course, please try again!');
+						setLoading(false);
 						setCourseUpdated(false);
 					});
 			} else {
@@ -173,11 +177,13 @@ export default function UpdateCourseCheckout() {
 				CourseApi.updateCourseWithoutImage(updatedCourse)
 					.then((res) => {
 						toast.success('Course updated successfully!');
+						setLoading(false);
 						setCourseUpdated(true);
 					})
 					.catch((err) => {
 						console.log(err);
 						toast.error('Error which updating course, please try again!');
+						setLoading(false);
 						setCourseUpdated(false);
 					});
 			}
@@ -188,6 +194,8 @@ export default function UpdateCourseCheckout() {
 	const handleBack = () => {
 		setActiveStep(activeStep - 1);
 	};
+
+	if (loading && activeStep === steps.length) return <LoadingComponent />;
 
 	return (
 		<ThemeProvider theme={theme}>
