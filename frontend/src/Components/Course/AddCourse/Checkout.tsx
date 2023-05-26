@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import AuthApi from '../../../Data/Auth';
 import CourseApi from '../../../Data/course';
 import { Link } from 'react-router-dom';
+import LoadingComponent from '../../MaterialUI/LoadingComponent';
 
 interface courseProps {
 	setContent: React.Dispatch<React.SetStateAction<string>>;
@@ -83,6 +84,7 @@ export default function Checkout() {
 	const [file, setFile] = useState<File | null>(null);
 	const [price, setPrice] = useState<number>(0);
 	const [courseAdded, setCourseAdded] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 	const username = AuthApi.getUsername();
 
 	const props: courseProps = {
@@ -127,11 +129,13 @@ export default function Checkout() {
 			CourseApi.addCourse(data)
 				.then((res) => {
 					toast.success('Course Added successfully!');
+					setLoading(false);
 					setCourseAdded(true);
 				})
 				.catch((err) => {
 					console.log(err);
 					toast.error('Error which adding course, please try again!');
+					setLoading(false);
 					setCourseAdded(false);
 				});
 		}
@@ -141,6 +145,8 @@ export default function Checkout() {
 	const handleBack = () => {
 		setActiveStep(activeStep - 1);
 	};
+
+	if (loading && activeStep === steps.length) return <LoadingComponent />;
 
 	return (
 		<ThemeProvider theme={theme}>
