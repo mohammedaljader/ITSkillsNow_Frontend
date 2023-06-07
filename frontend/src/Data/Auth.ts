@@ -41,6 +41,22 @@ export default class AuthApi {
 		return response.data;
 	}
 
+	static async signInWithMultiFactor(payload: signin): Promise<String> {
+		const response = await axios.post<String>(
+			getUrl('login-multiFactor'),
+			payload
+		);
+		return response.data;
+	}
+
+	static async checkMultiFactorCode(payload: string): Promise<tokenResponse> {
+		const response = await axios.post<tokenResponse>(
+			getUrl('login-multiFactor/').concat(payload)
+		);
+		localStorage.setItem('user', JSON.stringify(response.data));
+		return response.data;
+	}
+
 	static async signUp(payload: signup): Promise<string> {
 		const response = await axios.post<string>(getUrl('register'), payload);
 		return response.data;
