@@ -23,20 +23,20 @@ const signUpValidations = (data: FormData): boolean => {
 
 	// Check for empty values
 	if (!firstName || !lastName || !email || !password || !username) {
-		toast.info("Please fill out all fields.")
+		toast.info('Please fill out all fields.');
 		return false;
 	}
 
 	// Check for password length
 	if (password.length < 6) {
-		toast.info("Password must be at least 6 characters long.")
+		toast.info('Password must be at least 6 characters long.');
 		return false;
 	}
 
 	// Check for valid email format
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	if (!emailRegex.test(email)) {
-		toast.info("Please enter a valid email address.")
+		toast.info('Please enter a valid email address.');
 		return false;
 	}
 
@@ -66,12 +66,16 @@ export default function SignUp() {
 				email: email,
 				password: password,
 			})
-				.then(() => {
-					toast.success("Account created succcessfully")
-					navigate('/signin');
+				.then((res) => {
+					if (res === 'Email or username is already taken!') {
+						toast.error('Email or username is already taken!');
+					} else {
+						toast.success('Account created succcessfully');
+						navigate('/signin');
+					}
 				})
 				.catch((err) => {
-					toast.error("Failed to create an account, please try again!")
+					toast.error('Failed to create an account, please try again!');
 				});
 		}
 	};
