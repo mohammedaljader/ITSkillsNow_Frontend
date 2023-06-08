@@ -28,14 +28,14 @@ export const SignInWithMultiFactor = () => {
 				setNextPage(true);
 			})
 			.catch((err) => {
-				console.log(err.response.status);
 				toast.error('Wrong username or password!');
+				console.log(err);
 			});
 	};
 
 	const multiFactor = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		AuthApi.checkMultiFactorCode(code)
+		AuthApi.checkMultiFactorCode({ username: username, code: code })
 			.then((res) => {
 				toast.success('You signed in successfully!');
 				setTimeout(() => {
@@ -44,8 +44,14 @@ export const SignInWithMultiFactor = () => {
 				}, 3000);
 			})
 			.catch((err) => {
-				console.log(err.response.status);
-				toast.error('Code is invalid!');
+				if (err.response.status === 400) {
+					toast.error('Code is invalid!');
+				}
+
+				if (err.response.status === 429) {
+					toast.error('Too many attempts, please try again!');
+					setNextPage(false);
+				}
 			});
 	};
 

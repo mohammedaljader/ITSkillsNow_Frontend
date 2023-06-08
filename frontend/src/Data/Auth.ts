@@ -18,6 +18,11 @@ interface deleteAccount {
 	password: string;
 }
 
+interface SignInWithCode {
+	username: string;
+	code: string;
+}
+
 interface tokenResponse {
 	accessToken: string;
 }
@@ -49,9 +54,12 @@ export default class AuthApi {
 		return response.data;
 	}
 
-	static async checkMultiFactorCode(payload: string): Promise<tokenResponse> {
+	static async checkMultiFactorCode(
+		payload: SignInWithCode
+	): Promise<tokenResponse> {
 		const response = await axios.post<tokenResponse>(
-			getUrl('login-multiFactor/').concat(payload)
+			getUrl('check-multiFactor'),
+			payload
 		);
 		localStorage.setItem('user', JSON.stringify(response.data));
 		return response.data;
