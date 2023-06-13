@@ -12,6 +12,9 @@ import { CourseListPublic } from '../Components/Course/CourseListPublic';
 const theme = createTheme();
 
 export default function Home() {
+
+	console.log(process.env)
+
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
