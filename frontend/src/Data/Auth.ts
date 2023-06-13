@@ -35,8 +35,11 @@ interface User {
 	roles: string[];
 }
 
+
+
+
 const getUrl = (param: string): string => {
-	return `http://localhost:8080/auth/${param}`;
+	return `${process.env.REACT_APP_Backend_Url}/auth/${param}`;
 };
 
 export default class AuthApi {

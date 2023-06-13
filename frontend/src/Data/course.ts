@@ -57,7 +57,7 @@ export enum CourseLanguage {
 	JAPANESE = 'Japanese',
 }
 
-const url = 'http://localhost:8080/api/course';
+const url = `${process.env.REACT_APP_Backend_Url}/api/course`;
 
 export default class CourseApi {
 	static async getCourses(): Promise<CourseView[]> {

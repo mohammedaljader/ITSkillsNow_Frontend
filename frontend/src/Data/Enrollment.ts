@@ -13,7 +13,7 @@ export interface EnrollmentView {
 	courseView: CourseView;
 }
 
-const url = 'http://localhost:8080/api/course/enrollment';
+const url = `${process.env.REACT_APP_Backend_Url}/api/course/enrollment`;
 
 export default class EnrollmentApi {
 	static async enrollToCourse(payload: EnrollForCourse): Promise<boolean> {

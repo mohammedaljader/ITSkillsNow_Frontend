@@ -14,7 +14,7 @@ export interface FavoritesView {
 	courseView: CourseView;
 }
 
-const url = 'http://localhost:8080/api/course/favorites';
+const url =  `${process.env.REACT_APP_Backend_Url}/api/course/favorites`;
 
 export default class FavoritesCourseApi {
 	static async addCourseToFavorites(
