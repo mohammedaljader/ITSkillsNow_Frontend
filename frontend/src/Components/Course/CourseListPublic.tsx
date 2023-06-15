@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -7,36 +7,36 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import CourseApi, { CourseView } from '../../Data/course';
+import { CourseView } from '../../Data/course';
 import LoadingComponent from '../MaterialUI/LoadingComponent';
 import { useNavigate } from 'react-router-dom';
 
-export const CourseListPublic = () => {
-	const [courses, setCourses] = useState<CourseView[]>();
+interface CourseListPublicProps {
+	courses: CourseView[] | undefined;
+	loading: boolean;
+}
+
+const CourseListPublic: React.FC<CourseListPublicProps> = ({
+	courses,
+	loading,
+}) => {
 	const navigate = useNavigate();
-
-	const getAllCoursesByUsername = async (): Promise<void> => {
-		try {
-			const res = await CourseApi.getCourses();
-			setCourses(res);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	useEffect(() => {
-		getAllCoursesByUsername();
-	}, []);
 
 	const viewHandler = (courseId: string) => {
 		navigate(`/v1/viewCourse/${courseId}`);
 	};
 
-	if (!courses) return <LoadingComponent />;
+	if (loading) return <LoadingComponent />;
 
-	if (courses.length <= 0)
+	if (!courses || courses.length <= 0)
 		return (
-			<h1 style={{ textAlign: 'center' }}>There are no courses right now!</h1>
+			<Container
+				sx={{ py: 8 }}
+				maxWidth="md"
+				data-testid="courses"
+			>
+				<h1 style={{ textAlign: 'center' }}>There are no courses!</h1>{' '}
+			</Container>
 		);
 
 	return (
@@ -94,3 +94,5 @@ export const CourseListPublic = () => {
 		</Container>
 	);
 };
+
+export default CourseListPublic;

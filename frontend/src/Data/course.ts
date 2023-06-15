@@ -92,6 +92,13 @@ export default class CourseApi {
 		return response.data;
 	}
 
+	static async filterCourse(queryParams: string): Promise<CourseView[]> {
+		const response = await axios.get<CourseView[]>(
+			url.concat(`/filter?${queryParams}`)
+		);
+		return response.data;
+	}
+
 	static async updateCourse(payload: FormData): Promise<CourseView> {
 		const response = await axios.put<CourseView>(url, payload, {
 			headers: { Authorization: AuthHeader() },

@@ -16,7 +16,7 @@ import AuthApi from '../../Data/Auth';
 import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '../../Utils/isTokenExpired';
 
-const pages = ['home', 'About us'];
+const pages = ['home', 'About us', 'Courses', 'jobs'];
 const adminPage = [
 	'home',
 	'courses',
@@ -34,6 +34,8 @@ const navigatePages = (page: string) => {
 			return 'favoritesCourses';
 		case 'About us':
 			return 'aboutus';
+		case 'Courses':
+			return 'discover-new-courses';
 		default:
 			return page;
 	}

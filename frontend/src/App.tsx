@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { SignIn } from './Components/Auth/SignIn';
 import SignUp from './Components/Auth/SignUp';
 import Layout from './Components/Layout/Layout';
 import CourseListPage from './Pages/CourseListPage';
@@ -19,6 +18,7 @@ import UpdateCourseCheckout from './Components/Course/UpdateCourse/UpdateCourseC
 import { EnrollmentsList } from './Components/Enrollment/EnrollmentsList';
 import { CourseFavoriteList } from './Components/Course/Favorites/CourseFavoriteList';
 import { SignInWithMultiFactor } from './Components/MultiFactorAuth/SignInWithMultiFactor';
+import CourseListTest from './Components/Course/CourseListWithFilter';
 
 function App() {
 	return (
@@ -44,6 +44,10 @@ function App() {
 						<Route
 							path="/profile"
 							element={<Account />}
+						/>
+						<Route
+							path="/discover-new-courses"
+							element={<CourseListTest/>}
 						/>
 						<Route
 							path="/enrollments"

@@ -6,12 +6,12 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import { CardList } from '../Components/MaterialUI/CardList';
-import { CourseListPublic } from '../Components/Course/CourseListPublic';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function Home() {
+	const navigate = useNavigate();
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
@@ -51,22 +51,26 @@ export default function Home() {
 							justifyContent="center"
 						>
 							<Button
-								variant="contained"
+								variant="outlined"
 								data-testid="suggested-jobs-button"
+								onClick={() => {
+									navigate('/jobs');
+								}}
 							>
 								Suggested jobs
 							</Button>
 							<Button
-								variant="outlined"
+								variant="contained"
 								data-testid="suggested-courses-button"
+								onClick={() => {
+									navigate('/discover-new-courses');
+								}}
 							>
 								Suggested Courses
 							</Button>
 						</Stack>
 					</Container>
 				</Box>
-				{/* <CardList /> */}
-				<CourseListPublic/>
 			</main>
 		</ThemeProvider>
 	);

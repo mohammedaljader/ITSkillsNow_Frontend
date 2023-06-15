@@ -17,14 +17,14 @@ import { IconButton } from '@mui/material';
 import EnrollmentApi from '../../Data/Enrollment';
 import AuthApi from '../../Data/Auth';
 import { toast } from 'react-toastify';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import FavoritesCourseApi from '../../Data/FavoriteCourse';
 
 const ViewCoursePublic = () => {
 	const { courseId } = useParams();
 	const [course, setCourse] = useState<CourseView>();
 	const username = AuthApi.getUsername();
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const getCourseByCourseId = async (courseId: string): Promise<void> => {
@@ -50,6 +50,10 @@ const ViewCoursePublic = () => {
 	};
 
 	const enrollToCourse = () => {
+		if (!AuthApi.getUser()) {
+			navigate('/signin');
+			return;
+		}
 		if (courseId) {
 			EnrollmentApi.enrollToCourse({ courseId: courseId, username: username })
 				.then((res) => {
@@ -67,6 +71,10 @@ const ViewCoursePublic = () => {
 	};
 
 	const addCourseToFavorites = () => {
+		if (!AuthApi.getUser()) {
+			navigate('/signin');
+			return;
+		}
 		if (courseId) {
 			FavoritesCourseApi.addCourseToFavorites({
 				courseId: courseId,
