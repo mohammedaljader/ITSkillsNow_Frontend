@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	Box,
 	Button,
@@ -9,9 +9,43 @@ import {
 	Grid,
 	TextField,
 } from '@mui/material';
-// import { AccountProfile } from './AccountProfile';
+import ProfileAPI from '../../Data/Profile';
 
-export default function AccountProfileDetails() {
+interface UserProfileProps {
+	username: string;
+	address: string;
+	phoneNumber: string;
+	profession: string;
+}
+
+export const AccountProfileDetails: React.FC<UserProfileProps> = ({
+	address,
+	phoneNumber,
+	profession,
+	username,
+}) => {
+	const [Address, setAddress] = useState<string>(address);
+	const [PhoneNumber, setPhoneNumber] = useState<string>(phoneNumber);
+	const [Profession, setProfession] = useState<string>(profession);
+
+	const changeProfile = (event: React.FormEvent) => {
+		event.preventDefault();
+		ProfileAPI.updateProfile({
+			username: username,
+			address: Address,
+			phoneNumber: PhoneNumber,
+			profession: Profession,
+		})
+			.then((res) => {
+				setAddress(res.address);
+				setPhoneNumber(res.phoneNumber);
+				setProfession(res.profession);
+			})
+			.catch((error) => {
+				console.error('Error updating user profile:', error);
+			});
+	};
+
 	return (
 		<>
 			{/* <AccountProfile /> */}
@@ -34,11 +68,13 @@ export default function AccountProfileDetails() {
 							>
 								<TextField
 									fullWidth
-									helperText="Please specify the first name"
-									label="Name"
-									name="Name"
+									helperText="Please specify the address"
+									label="Address"
+									name="address"
 									required
+									defaultValue={Address}
 									variant="outlined"
+									onChange={(event) => setAddress(event.target.value)}
 								/>
 							</Grid>
 							<Grid
@@ -48,41 +84,28 @@ export default function AccountProfileDetails() {
 							>
 								<TextField
 									fullWidth
-									helperText="Please specify the email address"
-									label="Email Address"
-									name="email"
+									helperText="Please specify the phoneNumber"
+									label="PhoneNumber"
+									name="PhoneNumber"
 									required
-									// defaultValue={props.user.email}
+									defaultValue={PhoneNumber}
 									variant="outlined"
+									onChange={(event) => setPhoneNumber(event.target.value)}
 								/>
 							</Grid>
 							<Grid
 								item
-								md={6}
-								xs={12}
+								md={20}
+								xs={20}
 							>
 								<TextField
 									fullWidth
-									helperText="Please specify the password"
-									label="Password"
-									name="Password"
-									type="password"
+									helperText="Please specify the profession"
+									label="profession"
+									name="Profession"
 									required
-									variant="outlined"
-								/>
-							</Grid>
-							<Grid
-								item
-								md={6}
-								xs={12}
-							>
-								<TextField
-									fullWidth
-									helperText="Please specify the address"
-									label="Address"
-									name="address"
-									required
-									// defaultValue={props.user.address}
+									defaultValue={Profession}
+									onChange={(event) => setProfession(event.target.value)}
 									variant="outlined"
 								/>
 							</Grid>
@@ -94,6 +117,7 @@ export default function AccountProfileDetails() {
 							style={{ background: '#032892' }}
 							variant="contained"
 							type="submit"
+							onClick={changeProfile}
 						>
 							Save details
 						</Button>
@@ -102,4 +126,4 @@ export default function AccountProfileDetails() {
 			</form>
 		</>
 	);
-}
+};

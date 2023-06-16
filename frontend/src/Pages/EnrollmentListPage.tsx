@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import AuthApi from '../Data/Auth';
-import ViewCoursePublic from '../Components/Course/ViewCoursePublic';
+import { EnrollmentsList } from '../Components/Enrollment/EnrollmentsList';
 import { useNavigate } from 'react-router-dom';
 
-export const CourseViewPublicPage = () => {
+export const EnrollmentListPage = () => {
 	const isAuth = AuthApi.getUser();
 	const navigate = useNavigate();
 
@@ -31,11 +31,11 @@ export const CourseViewPublicPage = () => {
 						color="text.primary"
 						gutterBottom
 					>
-						Coure View
+						Enrollments
 					</Typography>
 				</Container>
 			</Box>
-			<ViewCoursePublic />
+			<EnrollmentsList />
 		</main>
 	);
 };

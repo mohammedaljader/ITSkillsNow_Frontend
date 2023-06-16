@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { SignIn } from './Components/Auth/SignIn';
 import SignUp from './Components/Auth/SignUp';
 import Layout from './Components/Layout/Layout';
 import CourseListPage from './Pages/CourseListPage';
@@ -16,9 +15,10 @@ import AboutUs from './Components/MaterialUI/AboutUs';
 import { CourseViewPublicPage } from './Pages/CourseViewPublicPage';
 import { CourseViewPage } from './Pages/CourseViewPage';
 import UpdateCourseCheckout from './Components/Course/UpdateCourse/UpdateCourseCheckout';
-import { EnrollmentsList } from './Components/Enrollment/EnrollmentsList';
-import { CourseFavoriteList } from './Components/Course/Favorites/CourseFavoriteList';
 import { SignInWithMultiFactor } from './Components/MultiFactorAuth/SignInWithMultiFactor';
+import CourseListWithFilter from './Components/Course/CourseListWithFilter';
+import { EnrollmentListPage } from './Pages/EnrollmentListPage';
+import { FavoriteCoursesListPage } from './Pages/FavoriteCoursesListPage';
 
 function App() {
 	return (
@@ -46,12 +46,16 @@ function App() {
 							element={<Account />}
 						/>
 						<Route
+							path="/discover-new-courses"
+							element={<CourseListWithFilter />}
+						/>
+						<Route
 							path="/enrollments"
-							element={<EnrollmentsList />}
+							element={<EnrollmentListPage />}
 						/>
 						<Route
 							path="/favoritesCourses"
-							element={<CourseFavoriteList />}
+							element={<FavoriteCoursesListPage />}
 						/>
 						<Route
 							path="/v1/viewCourse/:courseId"

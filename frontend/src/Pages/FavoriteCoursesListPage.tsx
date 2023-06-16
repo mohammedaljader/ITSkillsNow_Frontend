@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import AuthApi from '../Data/Auth';
-import ViewCoursePublic from '../Components/Course/ViewCoursePublic';
+import { CourseFavoriteList } from '../Components/Course/Favorites/CourseFavoriteList';
 import { useNavigate } from 'react-router-dom';
 
-export const CourseViewPublicPage = () => {
+export const FavoriteCoursesListPage = () => {
 	const isAuth = AuthApi.getUser();
 	const navigate = useNavigate();
 
@@ -31,11 +31,11 @@ export const CourseViewPublicPage = () => {
 						color="text.primary"
 						gutterBottom
 					>
-						Coure View
+						Favorite Courses
 					</Typography>
 				</Container>
 			</Box>
-			<ViewCoursePublic />
+			<CourseFavoriteList />
 		</main>
 	);
 };
