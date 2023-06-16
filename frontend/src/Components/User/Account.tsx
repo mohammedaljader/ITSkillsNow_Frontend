@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Box,
 	Container,
@@ -13,17 +13,30 @@ import {
 	TextField,
 } from '@mui/material';
 import { AccountProfile } from './AccountProfile';
-import AccountProfileDetails from './AccountProfileDetails';
+import { AccountProfileDetails } from './AccountProfileDetails';
 import AuthApi from '../../Data/Auth';
 import LoadingComponent from '../MaterialUI/LoadingComponent';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import ProfileAPI, { UserProfile } from '../../Data/Profile';
 
 export const Account = () => {
 	const [open, setOpen] = useState(false);
 	const [password, setPassword] = useState(String);
+	const [UserProfile, setUserProfile] = useState<UserProfile>();
 	const isUser = AuthApi.getUser();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const username = AuthApi.getUsername();
+		ProfileAPI.getUserByUsername(username)
+			.then((res) => {
+				setUserProfile(res);
+			})
+			.catch((error) => {
+				console.error('Error fetching user profile:', error);
+			});
+	}, []);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -56,7 +69,7 @@ export const Account = () => {
 		setOpen(false);
 	};
 
-	if (!isUser) return <LoadingComponent />;
+	if (!isUser || !UserProfile) return <LoadingComponent />;
 
 	return (
 		<Box
@@ -80,7 +93,12 @@ export const Account = () => {
 						md={6}
 						xs={12}
 					>
-						<AccountProfileDetails />
+						<AccountProfileDetails
+							username={UserProfile.username}
+							address={UserProfile.address}
+							phoneNumber={UserProfile.phoneNumber}
+							profession={UserProfile.profession}
+						/>
 					</Grid>
 					<Grid
 						item
@@ -88,7 +106,13 @@ export const Account = () => {
 						md={6}
 						xs={12}
 					>
-						<AccountProfile />
+						<AccountProfile
+						    username={UserProfile.username}
+							fullName={UserProfile.fullName}
+							address={UserProfile.address}
+							profileImage={UserProfile.profileImage}
+							email={UserProfile.email}
+						/>
 						<Button
 							style={{ backgroundColor: '#DB2903', marginTop: '10px' }}
 							fullWidth
