@@ -15,10 +15,10 @@ import AboutUs from './Components/MaterialUI/AboutUs';
 import { CourseViewPublicPage } from './Pages/CourseViewPublicPage';
 import { CourseViewPage } from './Pages/CourseViewPage';
 import UpdateCourseCheckout from './Components/Course/UpdateCourse/UpdateCourseCheckout';
-import { EnrollmentsList } from './Components/Enrollment/EnrollmentsList';
-import { CourseFavoriteList } from './Components/Course/Favorites/CourseFavoriteList';
 import { SignInWithMultiFactor } from './Components/MultiFactorAuth/SignInWithMultiFactor';
-import CourseListTest from './Components/Course/CourseListWithFilter';
+import CourseListWithFilter from './Components/Course/CourseListWithFilter';
+import { EnrollmentListPage } from './Pages/EnrollmentListPage';
+import { FavoriteCoursesListPage } from './Pages/FavoriteCoursesListPage';
 
 function App() {
 	return (
@@ -47,15 +47,15 @@ function App() {
 						/>
 						<Route
 							path="/discover-new-courses"
-							element={<CourseListTest/>}
+							element={<CourseListWithFilter />}
 						/>
 						<Route
 							path="/enrollments"
-							element={<EnrollmentsList />}
+							element={<EnrollmentListPage />}
 						/>
 						<Route
 							path="/favoritesCourses"
-							element={<CourseFavoriteList />}
+							element={<FavoriteCoursesListPage />}
 						/>
 						<Route
 							path="/v1/viewCourse/:courseId"

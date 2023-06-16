@@ -102,7 +102,7 @@ export const AccountProfileDetails: React.FC<UserProfileProps> = ({
 									fullWidth
 									helperText="Please specify the profession"
 									label="profession"
-									name="profession"
+									name="Profession"
 									required
 									defaultValue={Profession}
 									onChange={(event) => setProfession(event.target.value)}

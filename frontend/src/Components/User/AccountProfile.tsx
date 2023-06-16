@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
 	Avatar,
 	Box,
@@ -10,6 +10,7 @@ import {
 	Typography,
 } from '@mui/material';
 import ProfileAPI from '../../Data/Profile';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { toast } from 'react-toastify';
 
 interface UserProfileProps {
@@ -27,18 +28,9 @@ export const AccountProfile: React.FC<UserProfileProps> = ({
 	profileImage,
 	email,
 }) => {
-	const [uploadButtonDisabled, setUploadButtonDisabled] = useState(false);
 	const [ProfileImage, setProfileImage] = useState<string>(profileImage);
-	const fileInputRef = useRef<HTMLInputElement>(null);
 
-	const handleUploadButtonClick = () => {
-		if (!uploadButtonDisabled && fileInputRef.current) {
-			fileInputRef.current.click();
-			setUploadButtonDisabled(true);
-		}
-	};
-
-	const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 		if (!file) {
 			toast.info('you did not upload a picture!');
@@ -50,6 +42,7 @@ export const AccountProfile: React.FC<UserProfileProps> = ({
 
 		ProfileAPI.addProfileImage(data)
 			.then((res) => {
+				toast.success('Profile picture updated successfully!');
 				setProfileImage(res);
 			})
 			.catch((error) => {
@@ -86,13 +79,13 @@ export const AccountProfile: React.FC<UserProfileProps> = ({
 						color="textSecondary"
 						variant="body2"
 					>
-						{email}
+						Email: {email}
 					</Typography>
 					<Typography
 						color="textSecondary"
 						variant="body2"
 					>
-						{address}
+						Address: {address}
 					</Typography>
 				</Box>
 			</CardContent>
@@ -100,22 +93,24 @@ export const AccountProfile: React.FC<UserProfileProps> = ({
 			<CardActions>
 				<input
 					accept="image/*"
-					id="upload-image-input"
+					id="upload-button"
 					type="file"
 					style={{ display: 'none' }}
-					ref={fileInputRef}
-					onChange={handleImageUpload}
+					onChange={handleUpload}
 				/>
-				<label htmlFor="upload-image-input">
+				<label htmlFor="upload-button">
 					<Button
-						sx={{ color: '#032892', marginLeft: '60px' }}
-						fullWidth
-						variant="text"
 						component="span"
-						onClick={handleUploadButtonClick}
-						disabled={uploadButtonDisabled}
+						style={{
+							padding: 0,
+							minWidth: 'unset',
+							backgroundColor: 'transparent',
+							boxShadow: 'none',
+							marginLeft: '75px',
+						}}
 					>
-						Upload picture
+						<CloudUploadIcon style={{ marginRight: '0.5rem' }} />
+						Upload Picture
 					</Button>
 				</label>
 			</CardActions>
