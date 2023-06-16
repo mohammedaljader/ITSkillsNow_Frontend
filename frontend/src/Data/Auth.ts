@@ -101,6 +101,16 @@ export default class AuthApi {
 		return null;
 	}
 
+
+	static getUserRoles(): string[] {
+		const userStorage = localStorage.getItem('user');
+		if (userStorage) {
+			const user = JSON.parse(userStorage);
+			return user.roles;
+		}
+		return [];
+	}
+
 	static getUsername(): string {
 		const userStorage = localStorage.getItem('user');
 		if (userStorage) {

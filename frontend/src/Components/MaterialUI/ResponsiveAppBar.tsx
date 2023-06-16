@@ -17,13 +17,8 @@ import { useNavigate } from 'react-router-dom';
 import { isTokenExpired } from '../../Utils/isTokenExpired';
 
 const pages = ['home', 'About us', 'Courses', 'jobs'];
-const adminPage = [
-	'home',
-	'courses',
-	'jobs',
-	'enrollments',
-	'favorites Courses',
-];
+const adminPage = ['home', 'courses', 'jobs'];
+const userPage = ['home', 'enrollments', 'favorites Courses'];
 const settings = ['Profile', 'Logout'];
 
 const navigatePages = (page: string) => {
@@ -41,25 +36,9 @@ const navigatePages = (page: string) => {
 	}
 };
 
-// const routerPages = (page: string) => {
-// 	switch (page) {
-// 		case 'home':
-// 			return '';
-// 		case 'courses':
-// 			return 'courses';
-// 		case 'jobs':
-// 			return 'jobs';
-// 		case 'Profile':
-// 			return 'profile';
-// 		case 'Logout':
-// 			return 'logout';
-// 		default:
-// 			return '';
-// 	}
-// };
-
 function ResponsiveAppBar() {
 	const isAuth = AuthApi.getUser();
+	const roles = AuthApi.getUserRoles();
 	const navigate = useNavigate();
 	const user = AuthApi.getUserResponse();
 
@@ -140,15 +119,25 @@ function ResponsiveAppBar() {
 							}}
 						>
 							{isAuth
-								? adminPage.map((page) => (
-										<MenuItem
-											key={page}
-											onClick={handleCloseNavMenu}
-											href={`/${navigatePages(page)}`}
-										>
-											<Typography textAlign="center">{page}</Typography>
-										</MenuItem>
-								  ))
+								? roles.includes('ADMIN')
+									? adminPage.map((page) => (
+											<MenuItem
+												key={page}
+												onClick={handleCloseNavMenu}
+												href={`/${navigatePages(page)}`}
+											>
+												<Typography textAlign="center">{page}</Typography>
+											</MenuItem>
+									  ))
+									: userPage.map((page) => (
+											<MenuItem
+												key={page}
+												onClick={handleCloseNavMenu}
+												href={`/${navigatePages(page)}`}
+											>
+												<Typography textAlign="center">{page}</Typography>
+											</MenuItem>
+									  ))
 								: pages.map((page) => (
 										<MenuItem
 											key={page}
@@ -166,17 +155,29 @@ function ResponsiveAppBar() {
 
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 						{isAuth
-							? adminPage.map((page) => (
-									<Button
-										key={page}
-										onClick={handleCloseNavMenu}
-										style={{ marginBottom: '10px' }}
-										sx={{ my: 2, color: 'white', display: 'block' }}
-										href={`/${navigatePages(page)}`}
-									>
-										{page}
-									</Button>
-							  ))
+							? roles.includes('ADMIN')
+								? adminPage.map((page) => (
+										<Button
+											key={page}
+											onClick={handleCloseNavMenu}
+											style={{ marginBottom: '10px' }}
+											sx={{ my: 2, color: 'white', display: 'block' }}
+											href={`/${navigatePages(page)}`}
+										>
+											{page}
+										</Button>
+								  ))
+								: userPage.map((page) => (
+										<Button
+											key={page}
+											onClick={handleCloseNavMenu}
+											style={{ marginBottom: '10px' }}
+											sx={{ my: 2, color: 'white', display: 'block' }}
+											href={`/${navigatePages(page)}`}
+										>
+											{page}
+										</Button>
+								  ))
 							: pages.map((page) => (
 									<Button
 										key={page}
